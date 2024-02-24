@@ -96,7 +96,7 @@ export function App() {
                         fontSize: 32,
                     }}
                 >
-                    Upload a txt file to get started.
+                    Select a txt file to get started.
                 </div>
 
                 <TxtImporter onChange={setData} />

@@ -35,7 +35,7 @@ const TxtFileReader = ({ onChange }: { onChange: (newVal: SheetType) => void }) 
   return (
     <div>
       <input type="file" accept=".txt" onChange={handleFileChange} ref={fileInputRef} css={{ display: "none" }} />
-      <button onClick={handleBtnClick}>Upload file</button>
+      <button onClick={handleBtnClick}>Select file</button>
     </div>
   );
 };
