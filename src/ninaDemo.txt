@@ -1,0 +1,28 @@
+Nina
+
+# Neutral
+df 1 2 (pressure with extensions)
+d df f (step)
+1+4 (mid grounded force crouch)
+
+# Launcher
+df 2 (safe mid launcher)
+b 1+4 (launcher)
+
+# Lows
+d 3 4 3 (CH string)
+db 3
+
+# Heat Engagers
+f 4 2 (evasive mid)
+
+# Step Stance
+1 (high counter hit launcher)
+2 (mid engager)
+
+# Punish
+1 4 (10f)
+uf 2 (15f)
+
+# Combo
+launcher -> df 3 2 -> f 2 1 3 -> d df f 4 3 1+2

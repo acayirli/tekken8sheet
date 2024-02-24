@@ -84,7 +84,7 @@ export function Move({ move }: { move: MoveType }) {
             <div css={{ display: "flex", gap: 5, alignItems: "center" }}>
                 {
                     move.inputs.map((input, index) => (
-                        input in inputImageMap ? <img src={inputImageMap[input]} alt={`Input ${input}`} /> : <span>{input}</span>
+                        input in inputImageMap ? <img key={index} src={inputImageMap[input]} alt={`Input ${input}`} /> : <span key={index}>{input}</span>
                     ))
                 }
             </div>

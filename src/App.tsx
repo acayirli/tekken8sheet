@@ -1,8 +1,69 @@
 import { useState } from "react";
-import { Move } from "./components/Move/Move";
 import { SheetType } from "./types";
-import { JsonImporter } from "./components/JsonImporter/JsonImporter";
 import TxtImporter from "./components/TxtImporter/TxtImporter";
+import { Sheet } from "./components/Sheet/Sheet";
+
+const ninaDemo: SheetType = {
+    title: "Nina",
+    categories: [
+        {
+            title: "Neutral",
+            moves: [
+                {
+                    inputs: ["df", "1", "2"],
+                    hint: "pressure with extensions",
+                },
+                {
+                    inputs: ["d", "df", "f"],
+                    hint: "step stance",
+                },
+                {
+                    inputs: ["1+4"],
+                    hint: "mid grounded force crouch",
+                }
+            ]
+        },
+        {
+            title: "Launcher",
+            moves: [
+                {
+                    inputs: ["df", "2"],
+                    hint: "safe mid launcher",
+                },
+                {
+                    inputs: ["b", "1+4"],
+                    hint: "launcher",
+                }
+            ]
+        },
+        {
+            title: "Lows",
+            moves: [
+                {
+                    inputs: ["d", "3", "4", "3"],
+                    hint: "CH string",
+                },
+                {
+                    inputs: ["db", "3"],
+                    hint: "",
+                }
+            ]
+        },
+        {
+            title: "Punish",
+            moves: [
+                {
+                    inputs: ["1", "4"],
+                    hint: "10f",
+                },
+                {
+                    inputs: ["uf", "2"],
+                    hint: "15f",
+                }
+            ]
+        }
+    ]
+}
 
 export function App() {
     const [data, setData] = useState<SheetType | undefined>();
@@ -10,60 +71,11 @@ export function App() {
     if (data) {
         return (
             <div>
-                <TxtImporter onChange={setData} />
+                <div css={{ display: "flex", justifyContent: "flex-end" }}>
+                    <TxtImporter onChange={setData} />
+                </div>
 
-                {data && (
-                    <>
-                        <div
-                            css={{
-                                fontSize: 36,
-                                marginBottom: 10,
-                                fontFamily: "RobotoCondensedItalic, sans-serif",
-                            }}
-                        >
-                            {data.title.toUpperCase()}
-                        </div>
-
-                        <div
-                            css={{
-                                display: "grid",
-                                gridTemplateColumns:
-                                    "repeat(auto-fill, minmax(500px, 1fr))",
-                                gap: 20,
-                            }}
-                        >
-                            {data.categories.map((category) => (
-                                <div
-                                    css={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 10,
-                                    }}
-                                >
-                                    <div css={{ fontSize: 24 }}>
-                                        {category.title}
-                                    </div>
-
-                                    <div
-                                        css={{
-                                            display: "grid",
-                                            gridTemplateColumns:
-                                                "max-content max-content max-content",
-                                            alignItems: "center",
-                                            gridRowGap: 10,
-                                            gridColumnGap: 20,
-                                            img: { width: 30 },
-                                        }}
-                                    >
-                                        {category.moves.map((move) => (
-                                            <Move move={move} />
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
+                {data && <Sheet data={data} />}
             </div>
         );
     } 
@@ -75,7 +87,7 @@ export function App() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: 10,
+                    gap: 20,
                     flexGrow: 1,
                 }}
             >
@@ -89,17 +101,41 @@ export function App() {
 
                 <TxtImporter onChange={setData} />
                 
-                Here is an example:
+                <div css={{ display: "flex", gap: 40 }}>
+                    <div>
+                        Source
+                        <pre css={{ border: "thin solid #ccc", padding: "10px 20px", borderRadius: 5 }}>
+                        {
+`Nina
 
-                <div>
-                    <pre>
-                    Nina
+# Neutral
+df 1 2 (pressure with extensions)
+d df f (step)
+1+4 (mid grounded force crouch)
 
-                    # Neutral
-                    df 1 2 (pressure with extensions)
-                    df 3 1 (pressure with extensions)
-                    df 3 3 (mid mid force crouch)
-                    </pre>
+# Launcher
+df 2 (safe mid launcher)
+b 1+4 (launcher)
+
+# Lows
+d 3 4 3 (CH string)
+db 3
+
+# Punish
+1 4 (10f)
+uf 2 (15f)
+`
+                        }
+                        </pre>
+                    </div>
+
+                    <div>
+                        Output
+
+                        <div css={{ border: "thin solid #ccc", padding: "10px 20px", borderRadius: 5 }}>
+                            <Sheet data={ninaDemo} />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
