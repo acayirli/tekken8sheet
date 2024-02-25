@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SheetType } from "./types";
 import TxtImporter from "./components/TxtImporter/TxtImporter";
 import { Sheet } from "./components/Sheet/Sheet";
+import { Move } from "./components/Move/Move";
 
 const ninaDemo: SheetType = {
     title: "Nina",
@@ -102,6 +103,38 @@ export function App() {
                 <TxtImporter onChange={setData} />
                 
                 <div css={{ display: "flex", gap: 40 }}>
+                    <div css={{ display: "grid", gridTemplateColumns: "max-content max-content", gap: 10, "img": { width: 30 }, alignItems: "flex-start" }}>
+                        <span css={{ gridColumnStart: "span 2" }}>List of recognized inputs</span>
+                        <span>u</span><Move move={{ inputs: ["u"]}} />
+                        <span>d</span><Move move={{ inputs: ["d"]}} />
+                        <span>f</span><Move move={{ inputs: ["f"]}} />
+                        <span>b</span><Move move={{ inputs: ["b"]}} />
+
+                        <span>uf</span><Move move={{ inputs: ["uf"]}} />
+                        <span>ub</span><Move move={{ inputs: ["ub"]}} />
+                        <span>df</span><Move move={{ inputs: ["df"]}} />
+                        <span>db</span><Move move={{ inputs: ["db"]}} />
+
+                        <span>hold variant, e.g. fhold</span><Move move={{ inputs: ["fhold"]}} />
+                        <span>n</span><Move move={{ inputs: ["n"]}} />
+
+                        <span>1</span><Move move={{ inputs: ["1"]}} />
+                        <span>2</span><Move move={{ inputs: ["2"]}} />
+                        <span>3</span><Move move={{ inputs: ["3"]}} />
+                        <span>4</span><Move move={{ inputs: ["4"]}} />
+
+                        <span>1+2</span><Move move={{ inputs: ["1+2"]}} />
+                        <span>1+3</span><Move move={{ inputs: ["1+3"]}} />
+                        <span>1+4</span><Move move={{ inputs: ["1+4"]}} />
+                        <span>2+3</span><Move move={{ inputs: ["2+3"]}} />
+                        <span>2+4</span><Move move={{ inputs: ["2+4"]}} />
+                        <span>3+4</span><Move move={{ inputs: ["3+4"]}} />
+                        <span>1+2+3+4</span><Move move={{ inputs: ["1+2+3+4"]}} />
+
+                        <span>bracketl</span><Move move={{ inputs: ["bracketl"]}} />
+                        <span>bracketr</span><Move move={{ inputs: ["bracketr"]}} />
+                    </div>
+
                     <div>
                         Source
                         <pre css={{ border: "thin solid #ccc", padding: "10px 20px", borderRadius: 5 }}>
