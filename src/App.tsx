@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { parseTekkenNotation as parse } from "tekken-parser";
 import { SheetType } from "./types";
 import TxtImporter from "./components/TxtImporter/TxtImporter";
 import { Sheet } from "./components/Sheet/Sheet";
@@ -11,15 +12,15 @@ const ninaDemo: SheetType = {
             title: "Neutral",
             moves: [
                 {
-                    inputs: ["df", "1", "2"],
+                    combo: parse("df, 1, 2"),
                     hint: "pressure with extensions",
                 },
                 {
-                    inputs: ["d", "df", "f"],
+                    combo: parse("d df f"),
                     hint: "step stance",
                 },
                 {
-                    inputs: ["1+4"],
+                    combo: parse("1+4"),
                     hint: "mid grounded force crouch",
                 }
             ]
@@ -28,11 +29,11 @@ const ninaDemo: SheetType = {
             title: "Launcher",
             moves: [
                 {
-                    inputs: ["df", "2"],
+                    combo: parse("D/F 2"),
                     hint: "safe mid launcher",
                 },
                 {
-                    inputs: ["b", "1+4"],
+                    combo: parse("b 1+4"),
                     hint: "launcher",
                 }
             ]
@@ -41,11 +42,11 @@ const ninaDemo: SheetType = {
             title: "Lows",
             moves: [
                 {
-                    inputs: ["d", "3", "4", "3"],
+                    combo: parse("d 3 4 3"),
                     hint: "CH string",
                 },
                 {
-                    inputs: ["db", "3"],
+                    combo: parse("db 3"),
                     hint: "",
                 }
             ]
@@ -54,11 +55,11 @@ const ninaDemo: SheetType = {
             title: "Punish",
             moves: [
                 {
-                    inputs: ["1", "4"],
+                    combo: parse("1 4"),
                     hint: "10f",
                 },
                 {
-                    inputs: ["uf", "2"],
+                    combo: parse("uf 2"),
                     hint: "15f",
                 }
             ]
@@ -79,7 +80,7 @@ export function App() {
                 {data && <Sheet data={data} />}
             </div>
         );
-    } 
+    }
     else {
         return (
             <div
@@ -101,38 +102,38 @@ export function App() {
                 </div>
 
                 <TxtImporter onChange={setData} />
-                
+
                 <div css={{ display: "flex", gap: 40 }}>
                     <div css={{ display: "grid", gridTemplateColumns: "max-content max-content", gap: 10, "img": { width: 30 }, alignItems: "flex-start" }}>
                         <span css={{ gridColumnStart: "span 2" }}>List of recognized inputs</span>
-                        <span>u</span><Move move={{ inputs: ["u"]}} />
-                        <span>d</span><Move move={{ inputs: ["d"]}} />
-                        <span>f</span><Move move={{ inputs: ["f"]}} />
-                        <span>b</span><Move move={{ inputs: ["b"]}} />
+                        <span>u</span><Move move={{ combo: parse("u")}} />
+                        <span>d</span><Move move={{ combo: parse("d")}} />
+                        <span>f</span><Move move={{ combo: parse("f")}} />
+                        <span>b</span><Move move={{ combo: parse("b")}} />
 
-                        <span>uf</span><Move move={{ inputs: ["uf"]}} />
-                        <span>ub</span><Move move={{ inputs: ["ub"]}} />
-                        <span>df</span><Move move={{ inputs: ["df"]}} />
-                        <span>db</span><Move move={{ inputs: ["db"]}} />
+                        <span>uf (or u/f)</span><Move move={{ combo: parse("u/f")}} />
+                        <span>ub (or u/b)</span><Move move={{ combo: parse("ub")}} />
+                        <span>df (or d/f)</span><Move move={{ combo: parse("df")}} />
+                        <span>db (or d/b)</span><Move move={{ combo: parse("db")}} />
 
-                        <span>hold variant, e.g. fhold</span><Move move={{ inputs: ["fhold"]}} />
-                        <span>n</span><Move move={{ inputs: ["n"]}} />
+                        <span>holds (F, DB, etc.)</span><Move move={{ combo: parse("F")}} />
+                        <span>n</span><Move move={{ combo: parse("n")}} />
 
-                        <span>1</span><Move move={{ inputs: ["1"]}} />
-                        <span>2</span><Move move={{ inputs: ["2"]}} />
-                        <span>3</span><Move move={{ inputs: ["3"]}} />
-                        <span>4</span><Move move={{ inputs: ["4"]}} />
+                        <span>1</span><Move move={{ combo: parse("1")}} />
+                        <span>2</span><Move move={{ combo: parse("2")}} />
+                        <span>3</span><Move move={{ combo: parse("3")}} />
+                        <span>4</span><Move move={{ combo: parse("4")}} />
 
-                        <span>1+2</span><Move move={{ inputs: ["1+2"]}} />
-                        <span>1+3</span><Move move={{ inputs: ["1+3"]}} />
-                        <span>1+4</span><Move move={{ inputs: ["1+4"]}} />
-                        <span>2+3</span><Move move={{ inputs: ["2+3"]}} />
-                        <span>2+4</span><Move move={{ inputs: ["2+4"]}} />
-                        <span>3+4</span><Move move={{ inputs: ["3+4"]}} />
-                        <span>1+2+3+4</span><Move move={{ inputs: ["1+2+3+4"]}} />
+                        <span>1+2</span><Move move={{ combo: parse("1+2")}} />
+                        <span>1+3</span><Move move={{ combo: parse("1+3")}} />
+                        <span>1+4</span><Move move={{ combo: parse("1+4")}} />
+                        <span>2+3</span><Move move={{ combo: parse("2+3")}} />
+                        <span>2+4</span><Move move={{ combo: parse("2+4")}} />
+                        <span>3+4</span><Move move={{ combo: parse("3+4")}} />
+                        <span>1+2+3+4</span><Move move={{ combo: parse("1+2+3+4")}} />
 
-                        <span>bracketl</span><Move move={{ inputs: ["bracketl"]}} />
-                        <span>bracketr</span><Move move={{ inputs: ["bracketr"]}} />
+                        <span>bracketl</span><Move move={{ combo: parse("bracketl")}} />
+                        <span>bracketr</span><Move move={{ combo: parse("bracketr")}} />
                     </div>
 
                     <div>
@@ -142,7 +143,7 @@ export function App() {
 `Nina
 
 # Neutral
-df 1 2 (pressure with extensions)
+df, 1, 2 (pressure with extensions)
 d df f (step)
 1+4 (mid grounded force crouch)
 

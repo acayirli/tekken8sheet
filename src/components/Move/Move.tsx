@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { InputsType, MoveType, PropertiesType } from "../../types";
 
 import input1 from "../../assets/1.webp";
@@ -50,24 +51,24 @@ const inputImageMap: Record<string, string> = {
     "ub": inputub,
     "df": inputdf,
     "db": inputdb,
-    "1+2": input1_2,
-    "1+3": input1_3,
-    "1+4": input1_4,
-    "2+3": input2_3,
-    "2+4": input2_4,
-    "3+4": input3_4,
-    "1+2+3+4": input1_2_3_4,
-    "bhold": inputbhold,
+    "12": input1_2,
+    "13": input1_3,
+    "14": input1_4,
+    "23": input2_3,
+    "24": input2_4,
+    "34": input3_4,
+    "1234": input1_2_3_4,
+    "B": inputbhold,
     "bracketl": inputbracketl,
     "bracketr": inputbracketr,
-    "dbhold": inputdbhold,
-    "dfhold": inputdfhold,
-    "dhold": inputdhold,
-    "fhold": inputfhold,
+    "DB": inputdbhold,
+    "DF": inputdfhold,
+    "D": inputdhold,
+    "F": inputfhold,
     "n": inputn,
-    "ubhold": inputubhold,
-    "ufhold": inputufhold,
-    "uhold": inputuhold
+    "UB": inputubhold,
+    "UF": inputufhold,
+    "U": inputuhold
 };
 
 const propertiesImageMap: Record<PropertiesType, string> = {
@@ -79,15 +80,28 @@ const propertiesImageMap: Record<PropertiesType, string> = {
 }
 
 export function Move({ move }: { move: MoveType }) {
-    return (
+    const moves = move?.combo?.moves;
+    const allSlugs = moves?.map((move) =>
+        move.instructions.map((instruction) =>
+            instruction.slug
+        )
+    );
+
+    return !allSlugs ? null : (
         <>
-            <div css={{ display: "flex", gap: 5, alignItems: "center" }}>
+            {allSlugs.map(moveSlugs => <div css={{
+                display: "flex",
+                gap: 5,
+                alignItems: "center"
+            }}>
                 {
-                    move.inputs.map((input, index) => (
-                        input in inputImageMap ? <img key={index} src={inputImageMap[input]} alt={`Input ${input}`} /> : <span key={index}>{input}</span>
+                    moveSlugs.map((input, index) => (
+                      input in inputImageMap ?
+                        <img key={index} src={inputImageMap[input]} alt={`Input ${input}`} /> :
+                        <span key={index}>{input}</span>
                     ))
                 }
-            </div>
+            </div>)}
 
             <div css={{ display: "flex", gap: 5, alignItems: "center" }}>
                 {
