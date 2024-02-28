@@ -87,10 +87,6 @@ export function Move({ move }: { move: MoveType }) {
         )
     );
 
-    useEffect(() => {
-        console.log(moves);
-    }, [moves])
-
     return !allSlugs ? null : (
         <>
             {allSlugs.map(moveSlugs => <div css={{
